@@ -1,6 +1,4 @@
 // Sidebar navigation + progress
-const { useState: useStateSidebar } = React;
-
 function Sidebar({ sections, activeId, onNav, progress, savedAt }) {
   const total = sections.reduce((acc, s) => acc + s.questions.length, 0);
   const answered = Object.keys(progress).filter((k) => {
