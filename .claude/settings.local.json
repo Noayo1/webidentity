@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where node *)",
+      "Bash(py --version)",
+      "Bash(python -m http.server 8000)",
+      "Bash(npx --yes http-server -p 8000 -c-1)"
+    ]
+  }
+}

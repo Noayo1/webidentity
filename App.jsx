@@ -112,6 +112,7 @@ function App() {
           onNav={navTo}
           progress={answers}
           savedAt={savedAt}
+          onPreview={() => setPreviewOpen(true)}
         />
 
         <main className="main">
