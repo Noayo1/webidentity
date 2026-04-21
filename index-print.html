@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>אפיון אתר תדמית — להדפסה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm;
+  }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html, body {
+    background: #FBF8F1 !important;
+    background-image: none !important;
+    color: #141210;
+  }
+
+  /* Hide interactive chrome */
+  .marquee,
+  .sidebar,
+  .preview-toggle,
+  .preview-panel,
+  .submit-btn,
+  .submit-row .submit-hint::after { display: none !important; }
+
+  .app {
+    display: block !important;
+    max-width: 100% !important;
+  }
+
+  .main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Hero */
+  .intro { margin-bottom: 40px !important; page-break-after: always; break-after: page; }
+  .intro-title { font-size: 72px !important; line-height: 0.95 !important; }
+  .intro-subtitle { font-size: 14px !important; max-width: 100% !important; }
+  .intro-meta { font-size: 10px !important; }
+  .intro-stats { padding: 12px 0 !important; }
+  .intro-stat-val { font-size: 22px !important; }
+  .intro-stat-label { font-size: 9px !important; }
+
+  /* Each section on its own page */
+  .section {
+    page-break-before: always;
+    break-before: page;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+  .section:first-of-type {
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  /* Dark section overrides for print legibility */
+  .section[data-id="design"] {
+    background: #FBF8F1 !important;
+    color: #141210 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .section[data-id="design"] .section-title { color: #141210 !important; }
+  .section[data-id="design"] .section-subtitle { color: #4D463D !important; }
+  .section[data-id="design"] .section-num { -webkit-text-stroke: 1.5px #141210 !important; }
+  .section[data-id="design"] .q-label { color: #141210 !important; }
+  .section[data-id="design"] .q-help { color: #7A7064 !important; }
+  .section[data-id="design"] .q-num { color: #C94A25 !important; }
+
+  .section-head {
+    margin-bottom: 24px !important;
+    gap: 20px !important;
+  }
+  .section-num {
+    font-size: 110px !important;
+    line-height: 0.8 !important;
+  }
+  .section-title { font-size: 36px !important; }
+  .section-subtitle { font-size: 13px !important; }
+  .section-eyebrow { font-size: 9px !important; }
+
+  /* Questions */
+  .q-shell {
+    background: #FBF8F1 !important;
+    border: 1px solid #D6CDB8 !important;
+    padding: 16px 20px !important;
+    margin-bottom: 8px !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .q-shell.answered { background: #F3EFE5 !important; }
+  .q-head { gap: 12px !important; margin-bottom: 10px !important; }
+  .q-num { font-size: 9px !important; }
+  .q-label { font-size: 13px !important; }
+  .q-help { font-size: 11px !important; }
+  .q-body { padding-inline-start: 0 !important; }
+
+  /* Form fields — flatten for print */
+  .f-text, .f-textarea {
+    background: #FBF8F1 !important;
+    border: 1px solid #D6CDB8 !important;
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+    min-height: 32px !important;
+    color: #141210 !important;
+    border-radius: 4px !important;
+  }
+  .f-textarea { min-height: 56px !important; }
+
+  .f-radio-group, .f-check-group { gap: 6px !important; }
+  .f-radio, .f-check {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    background: #FBF8F1 !important;
+    color: #141210 !important;
+    border: 1px solid #D6CDB8 !important;
+    break-inside: avoid;
+  }
+  .f-radio.sel, .f-check.sel { background: #141210 !important; color: #FBF8F1 !important; }
+  .f-radio-label, .f-check-label { font-size: 11px !important; }
+  .f-check-box { width: 14px !important; height: 14px !important; }
+  .f-radio-dot { width: 14px !important; height: 14px !important; }
+
+  /* Mood picker — keep on one page */
+  .f-mood-grid {
+    gap: 8px !important;
+    break-inside: avoid;
+  }
+  .f-mood {
+    background: #141210 !important;
+    border: 1px solid #141210 !important;
+    break-inside: avoid;
+  }
+  .f-mood-preview { padding: 14px 14px !important; min-height: 80px !important; }
+  .f-mood-big { font-size: 28px !important; }
+  .f-mood-small { font-size: 9px !important; }
+  .f-mood-swatch { width: 12px !important; height: 12px !important; }
+  .f-mood-info { padding: 10px 14px !important; }
+  .f-mood-title { font-size: 12px !important; }
+  .f-mood-desc { font-size: 10px !important; }
+
+  /* Upload */
+  .f-upload-zone {
+    padding: 16px !important;
+    background: #F3EFE5 !important;
+  }
+  .f-upload-text { font-size: 12px !important; }
+  .f-upload-hint { font-size: 9px !important; }
+
+  /* Outro */
+  .outro {
+    margin-top: 0 !important;
+    page-break-before: always;
+    break-before: page;
+  }
+  .outro-divider { margin-bottom: 24px !important; }
+  .outro-divider-text { font-size: 9px !important; }
+  .outro-card {
+    padding: 20px 0 !important;
+    gap: 20px !important;
+    grid-template-columns: 100px 1fr !important;
+    break-inside: avoid;
+  }
+  .outro-title { font-size: 24px !important; }
+  .outro-body { font-size: 12px !important; }
+  .outro-range { font-size: 11px !important; padding: 10px 14px !important; }
+  .outro-note { font-size: 10px !important; padding: 10px 14px !important; }
+  .outro-eyebrow { font-size: 9px !important; }
+
+  .submit-row {
+    padding: 16px 0 !important;
+    margin-top: 12px !important;
+    display: block !important;
+  }
+  .submit-hint {
+    font-size: 10px !important;
+    color: #7A7064 !important;
+    text-align: center;
+    display: block;
+  }
+
+  /* Screen preview when viewing before print */
+  @media screen {
+    body { padding: 24px; }
+    .main { max-width: 780px; margin: 0 auto; background: #FBF8F1; padding: 40px !important; border: 1px solid #D6CDB8; }
+    .sidebar, .marquee, .preview-toggle { display: none !important; }
+    .app { display: block !important; grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data/questions.js"></script>
+<script type="text/babel" src="components/FormFields.jsx"></script>
+<script type="text/babel" src="components/Sidebar.jsx"></script>
+<script type="text/babel" src="components/PreviewPanel.jsx"></script>
+<script type="text/babel" src="App.jsx"></script>
+
+<script type="text/babel">
+  // Wait for fonts + React render, then auto-trigger print
+  (async () => {
+    try { await document.fonts.ready; } catch (e) {}
+    await new Promise((r) => setTimeout(r, 1200));
+    window.print();
+  })();
+</script>
+</body>
+</html>
